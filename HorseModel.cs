@@ -109,7 +109,7 @@ namespace TushonkaHorse
                     renderer.receiveShadows = true;
                     renderers.Add(renderer);
                     // Wide enough for every pose (a rearing jump included), so it isn't skinned while nobody can see it.
-                    // The box is in the root bone's own space, which the kit has at 1/100 scale: 7 m across in the world.
+                    // The box is in the root bone's own space, which the model has at 1/100 scale: 7 m across in the world.
                     renderer.updateWhenOffscreen = false;
                     float unit = Mathf.Max(1e-4f, Mathf.Abs(data.Rest[0].S.x));
                     renderer.localBounds = new Bounds(Vector3.zero, Vector3.one * (7f / unit));

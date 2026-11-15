@@ -1,8 +1,10 @@
 # Tushonka Horse
 
-Client-side BepInEx plugin for SPT, with Fika and headless-host support. Call your horse in a
-raid and it turns up beside you, to ride. It doesn't appear until you call it, unless you set it to wait beside
-you at the start of each raid.
+**This is a joke mod.** You get a horse in Tarkov. You can ride it into a firefight. That's it, and it's funny as
+hell. It's not going to get updates, fixes or new features. What's here is what you get.
+
+Client-side BepInEx plugin for SPT, with Fika and headless-host support. Whistle and your horse turns up beside you
+in the raid. Get on and ride.
 
 ## Install
 
@@ -19,35 +21,25 @@ every player and any headless host installs the same version.
 | W + Sprint | Gallop |
 | S | Back up / brake |
 | A / D | Turn |
-| Jump | Jump (about 1.1 m). Off a ledge it falls and lands with the kit's fall and landing clips |
-
+| Jump | Jump (about 1.1 m). Off a ledge it falls and lands |
 
 ## Settings (F12)
 
-The everyday settings are shown; the fine-tuning ones appear when "Advanced settings" is ticked at the top of the
-window.
-
 Name, coat (dark brown, light brown, spotted, brown), size, keys, speeds, turn rate, acceleration, jump height,
-animated or quick mounting, mount animation speed, whether your weapon is put away to climb and drawn again in the
-saddle, left hand on the reins with a gun out, reins in empty hands, whether the climb turns your view, animated or hidden legs, seat offset (if your view
-sits too high or low), a debug line, and a self test (the mod gets on, rides and gets off by itself a few seconds
-into a raid, saving pictures and a log to its `test` folder).
+animated or quick mounting, weapon and reins options, animated or hidden legs, seat offset, a debug line, and a self
+test (the mod gets on, rides and gets off by itself a few seconds into a raid, saving pictures and a log to its
+`test` folder). The fine-tuning ones appear when "Advanced settings" is ticked.
 
 ## Fika
 
-Every player, and the headless host when one is used, must install the same complete version. Each player owns and
-controls their own horse. Horse position, orientation, coat, scale and animation are relayed by the host so the other
-players see it; the ordinary Fika player replication keeps its rider on it. A headless host runs only the small network
-relay and does not create a horse, load its meshes, patch rider controls, or access presentation/UI objects.
-
-Solo SPT still works without Fika installed; the optional `TushonkaHorse.Fika.dll` is loaded only when Fika is present.
+Every player, and the headless host when one is used, must install the same version. Each player has their own
+horse, and everyone sees everyone else's horse and rider. A headless host only relays and doesn't load the horse.
 
 ## Limits
 
 - The horse can't be hurt, and bots ignore it.
-- In the saddle your upper body keeps the game's own pose (so you can still aim and shoot); only your legs (and
-  empty hands) follow the rider animations there. The whole body follows them while getting on and off.
 - Ridden, it won't go through doorways or under low roofs (your head wouldn't fit).
+- Things are a bit janky in places. It's a joke mod. Enjoy the jank.
 
 ## Source
 

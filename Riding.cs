@@ -11,8 +11,8 @@ namespace TushonkaHorse
     /// character and given to the horse (Riding.Patches), and each frame your character is put where the rider animation
     /// has it, at the point where the game would have moved it. You count as on the ground the whole time.
     ///
-    /// Getting on: you put your weapon away and step to the horse's side, then climb with the kit's rider animation
-    /// (its dismount, backwards, as the kit does) on your own body: hips, chest, arms and legs follow it, faded in from
+    /// Getting on: you put your weapon away and step to the horse's side, then climb with the rider animation
+    /// (its dismount, backwards) on your own body: hips, chest, arms and legs follow it, faded in from
     /// how you stood, and your view goes where the rider's head goes and turns the way the rider faces. In the saddle
     /// your weapon comes back out. Getting off is the same the other way round.
     ///

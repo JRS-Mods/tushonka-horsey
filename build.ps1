@@ -4,8 +4,7 @@ param(
 )
 
 # Builds TushonkaHorse.dll against the SPT install, packs dist\TushonkaHorse-<version>.zip and copies it into
-# BepInEx\plugins\TushonkaHorse. The assets (assets\) come from the tools: tools\export_unreal.py and
-# tools\export_hair_gltf.py in Unreal, then tools\convert_blender.py in Blender (see README).
+# BepInEx\plugins\TushonkaHorse. The assets (assets\) aren't in the repo; they come with the release zip.
 $ErrorActionPreference = 'Stop'
 $name = 'TushonkaHorse'
 $root = $PSScriptRoot

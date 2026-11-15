@@ -36,7 +36,7 @@ namespace TushonkaHorse
         private float Scale => Plugin.Scale.Value;
         internal float Yaw => yaw;
         internal float Speed => speed;
-        /// <summary>Where the reins are gathered (the kit moves this with every clip, as if a rider held them).</summary>
+        /// <summary>Where the reins are gathered (every clip moves this, as if a rider held them).</summary>
         internal Vector3? ReinHold => reinHold != null ? reinHold.position : (Vector3?)null;
         private Transform reinHold;
 

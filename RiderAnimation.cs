@@ -6,7 +6,7 @@ using UnityEngine;
 namespace TushonkaHorse
 {
     /// <summary>
-    /// The kit's rider animations (rider.bin, tools/convert_blender.py) as joint positions in the horse model's space:
+    /// The rider animations (rider.bin) as joint positions in the horse model's space:
     /// where the rider's pelvis, head, hands, knees and feet are on (or beside) the horse at each frame. These are put
     /// onto the game's own character by RiderRig, so no skeleton has to match.
     /// </summary>
@@ -80,7 +80,7 @@ namespace TushonkaHorse
             }
         }
 
-        /// <summary>The rider clip that goes with a horse clip (the kit made them in pairs); remembered once worked out.</summary>
+        /// <summary>The rider clip that goes with a horse clip (they come in pairs); remembered once worked out.</summary>
         public string ForHorse(string horseClip)
         {
             if (horseClip == null) return Idle;

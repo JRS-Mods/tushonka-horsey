@@ -33,7 +33,7 @@ namespace TushonkaHorse
         private const float BackAuthored = 1.05f;
 
         // How far it's bent into a turn (-1 left .. 1 right). It follows the turning, but takes its time: the neck and
-        // body swing over about half a second, not with every touch of the keys. (The kit's "hard" turning clips throw
+        // body swing over about half a second, not with every touch of the keys. (The "hard" turning clips throw
         // the head most of a metre sideways, which read as the head whipping about; these are its gentle ones.)
         private float lean;
         private const float LeanTime = .45f;
@@ -56,7 +56,7 @@ namespace TushonkaHorse
 
         private void Animate(float dt)
         {
-            // Being got on or off: the horse's half of the kit's mount/dismount, in time with the rider's.
+            // Being got on or off: the horse's half of the mount/dismount, in time with the rider's.
             string climbed = Ridden ? Riding.HorseClip : null;
             if (climbed != null)
             {
@@ -75,7 +75,7 @@ namespace TushonkaHorse
                 else if (done) { jumping = false; fell = true; }
                 else return;
             }
-            // Off a ledge: the kit's in-the-air loop, then its landing.
+            // Off a ledge: the in-the-air loop, then its landing.
             if (airborne && (fell || airTime > .2f))
             {
                 if (!fell) { fell = true; model.NextBlend(.2f); }
