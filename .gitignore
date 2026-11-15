@@ -1,0 +1,9 @@
+bin/
+obj/
+Fika/bin/
+Fika/obj/
+dist/
+work/
+assets/
+*.user
+.vs/
