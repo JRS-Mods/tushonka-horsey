@@ -1,5 +1,7 @@
 # Tushonka Horse
 
+![Riding the horse](media/riding.gif)
+
 **This is a joke mod.** You get a horse in Tarkov. You can ride it into a firefight. That's it, and it's funny as
 hell. It's not going to get updates, fixes or new features. What's here is what you get.
 
