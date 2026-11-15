@@ -26,9 +26,8 @@ every player and any headless host installs the same version.
 ## Settings (F12)
 
 Name, coat (dark brown, light brown, spotted, brown), size, keys, speeds, turn rate, acceleration, jump height,
-animated or quick mounting, weapon and reins options, animated or hidden legs, seat offset, a debug line, and a self
-test (the mod gets on, rides and gets off by itself a few seconds into a raid, saving pictures and a log to its
-`test` folder). The fine-tuning ones appear when "Advanced settings" is ticked.
+animated or quick mounting, weapon and reins options, animated or hidden legs, seat offset and a debug line. The
+fine-tuning ones appear when "Advanced settings" is ticked.
 
 ## Fika
 
@@ -51,4 +50,3 @@ horse, and everyone sees everyone else's horse and rider. A headless host only r
 | `Riding.cs`, `Riding.Patches.cs`, `RiderView.cs` | You on the horse: getting on and off, your weapon, where your character is put; the hooks into the game's character; the "hidden legs" setting |
 | `HorseNet.cs`, `Fika/FikaLink.cs` | Optional Fika handshake, host/headless relay, and remote horse replicas |
 | `RiderAnimation.cs`, `RiderRig.cs` | `rider.bin`; putting it onto your character's hips, chest, arms and legs, blended over the game's pose |
-| `HorseTest.cs` | The self test |

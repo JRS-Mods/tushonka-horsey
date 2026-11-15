@@ -20,7 +20,7 @@ namespace TushonkaHorse
         internal static ManualLogSource Log;
         internal static string AssetFolder;
 
-        internal static ConfigEntry<bool> Enabled, SpawnAtRaidStart, AnimatedMount, StowWeapon, DrawInSaddle, ReinHands, OneHanded, GuideView, HeadRoom, SteerWithCamera, NormalMaps, ShowDebug, SelfTest;
+        internal static ConfigEntry<bool> Enabled, SpawnAtRaidStart, AnimatedMount, StowWeapon, DrawInSaddle, ReinHands, OneHanded, GuideView, HeadRoom, SteerWithCamera, NormalMaps, ShowDebug;
         internal static ConfigEntry<string> HorseName;
         internal static ConfigEntry<Coat> HorseCoat;
         internal static ConfigEntry<LegStyle> RiderLegs;
@@ -75,7 +75,6 @@ namespace TushonkaHorse
             NormalMaps = Config.Bind("5. Graphics", "Coat detail map", true, new ConfigDescription("The coat's normal map (muscle and hair detail). Takes effect next raid.", null, Advanced));
             ManeCutoff = Config.Bind("5. Graphics", "Mane cutoff", .35f, new ConfigDescription("How see-through a hair card's pixel can be and still show. Takes effect next raid.", new AcceptableValueRange<float>(.05f, .9f), Advanced));
             ShowDebug = Config.Bind("6. Debug", "Show debug line", false, new ConfigDescription("Speed, gait and input on screen.", null, Advanced));
-            SelfTest = Config.Bind("6. Debug", "Self test", false, new ConfigDescription("A few seconds into a raid (and whenever a file called test.go appears in the mod's folder) the mod gets on, rides and gets off by itself, saving pictures and a log to its 'test' folder. For checking the mod; leave off to play.", null, Advanced));
 
             HorseNet.Load();
             if (HorseNet.Headless)

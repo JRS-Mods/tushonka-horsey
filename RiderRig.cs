@@ -43,10 +43,6 @@ namespace TushonkaHorse
         private Vector3 pelvisWas;
         private bool posed;
 
-        /// <summary>The self test: after each pose, how far your hands and feet ended up from where the animation has them.</summary>
-        public static bool Measure;
-        public string Report { get; private set; } = "";
-
         public Player Owner { get; }
         public Transform Head { get; }
         public Transform Pelvis { get; }
@@ -265,17 +261,6 @@ namespace TushonkaHorse
                 }
                 Blend(legBones, legsWas, legWeight);
             }
-            if (Measure) Report = Measured(joints, shift, body, armWeight, legWeight, climbing) + (reins.HasValue ? $", rein hand {(arms[0].End.position - reins.Value).magnitude * 100:0} cm from the reins" : "");
-        }
-
-        private string Measured(Vector3[] joints, Vector3 shift, float body, float armWeight, float legWeight, bool climbing)
-        {
-            string Off(Limb l) => ((l.End.position - (joints[l.Hand] + shift)).magnitude * 100).ToString("0");
-            float ground = Owner.Position.y;
-            string text = $"posed body {body:0.0} arms {armWeight:0.0} legs {legWeight:0.0}{(climbing ? " climbing" : "")}: cm off, pelvis {(Pelvis.position - (joints[pelvisJoint] + shift)).magnitude * 100:0}";
-            if (arms != null) text += $" hands {Off(arms[0])}/{Off(arms[1])}";
-            if (legs != null) text += $" feet {Off(legs[0])}/{Off(legs[1])}; feet {legs[0].End.position.y - ground:0.00}/{legs[1].End.position.y - ground:0.00} m up";
-            return text + $", head {Head.position.y - ground:0.00}, pelvis {Pelvis.position.y - ground:0.00}";
         }
 
         /// <summary>Back to the pose the game gave (nothing to do if none was put on).</summary>

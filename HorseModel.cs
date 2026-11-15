@@ -46,19 +46,6 @@ namespace TushonkaHorse
         private readonly float restHeight;
 
         private readonly List<Renderer> renderers = new List<Renderer>();
-        /// <summary>How many of its parts a camera drew last frame (for the self test).</summary>
-        public string Seen { get { int n = 0; foreach (Renderer r in renderers) if (r != null && r.isVisible) n++; return n + "/" + renderers.Count; } }
-
-        /// <summary>None of its materials has been destroyed under it (for the self test).</summary>
-        public bool MaterialsIntact
-        {
-            get
-            {
-                foreach (Renderer r in renderers)
-                    if (r != null) foreach (Material m in r.sharedMaterials) if (m == null) return false;
-                return true;
-            }
-        }
 
         public Transform Bone(string name) => byName.TryGetValue(name, out Transform t) ? t : null;
         public float Length(string name) => clips[name].Length;

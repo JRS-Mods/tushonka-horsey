@@ -19,9 +19,7 @@ namespace TushonkaHorse
         internal static float SprintSince { get; private set; }
 
         /// <summary>The movement keys as the game read them (x right, y forward), only while they're current.</summary>
-        internal static Vector2 Steering => Override ?? (Time.time - inputAt < .25f ? input : Vector2.zero);
-        /// <summary>The self test's hands on the reins, in place of the keys.</summary>
-        internal static Vector2? Override;
+        internal static Vector2 Steering => (Time.time - inputAt < .25f ? input : Vector2.zero);
 
         internal static void Patch(Harmony harmony)
         {

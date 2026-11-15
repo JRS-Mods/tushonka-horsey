@@ -113,34 +113,6 @@ namespace TushonkaHorse
             Show(state, state.Owner);
         }
 
-        /// <summary>
-        /// The self test's stand-in for another player: your own horse's state shown as a remote horse would be
-        /// (null takes it away), so the replica can be checked without a second game.
-        /// </summary>
-        internal const int EchoKey = int.MinValue;
-        internal static void Echo(HorseState? state)
-        {
-            if (state == null) { Remove(EchoKey); return; }
-            HorseState s = state.Value;
-            s.Owner = EchoKey;
-            Show(s, EchoKey);
-        }
-
-        /// <summary>Other players' horses shown here (for the self test).</summary>
-        internal static string RemoteReport
-        {
-            get
-            {
-                var parts = new List<string>();
-                foreach (KeyValuePair<int, HorseReplica> pair in replicas)
-                    if (pair.Key != EchoKey && pair.Value != null)
-                        parts.Add($"{pair.Key}:{pair.Value.Clip}@{pair.Value.transform.position} seen {pair.Value.Seen}");
-                return parts.Count == 0 ? "none" : string.Join(", ", parts);
-            }
-        }
-
-        internal static HorseReplica EchoReplica => replicas.TryGetValue(EchoKey, out HorseReplica r) ? r : null;
-
         private static void Show(HorseState state, int key)
         {
             if (!state.Spawned)
@@ -224,8 +196,6 @@ namespace TushonkaHorse
             return replica;
         }
 
-        internal string Seen => model == null ? "-" : model.Seen + (model.MaterialsIntact ? "" : " MATERIALS LOST");
-        internal string Clip => model == null ? "-" : model.Current;
 
         private static Coat ValidCoat(byte value) => value <= (byte)Coat.Brown ? (Coat)value : Coat.DarkBrown;
 

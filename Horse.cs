@@ -18,7 +18,6 @@ namespace TushonkaHorse
         private HorseModel model;
         private Transform spineA, spineB;
         private HorseDebug debug;
-        private HorseTest test;
         private bool failed;
         private float nextTry, deadline;
         private float nextNet;
@@ -62,7 +61,6 @@ namespace TushonkaHorse
         private void Update()
         {
             if (failed) return;
-            if (Plugin.SelfTest.Value && test == null) { test = gameObject.AddComponent<HorseTest>(); test.Horse = this; }
             try { Tick(Time.deltaTime); }
             catch (Exception e)
             {
@@ -99,13 +97,10 @@ namespace TushonkaHorse
             if (Plugin.ShowDebug.Value != (debug != null)) ToggleDebug();
         }
 
-        /// <summary>Self test: your horse is also shown as another player's would be, this far to its right (m), in the next coat.</summary>
-        internal float? Echo;
-
         private void Network(bool spawned, Player player)
         {
             bool online = HorseNet.Online;
-            if ((!online && Echo == null) || (Time.time < nextNet && spawned == netSpawned)) return;
+            if (!online || (Time.time < nextNet && spawned == netSpawned)) return;
             nextNet = Time.time + (spawned ? .05f : 1f);
             netSpawned = spawned;
             var state = new HorseState
@@ -124,14 +119,7 @@ namespace TushonkaHorse
                 Looping = spawned && model.Looping,
                 RootY = spawned ? model.Root.localPosition.y : 0
             };
-            if (online) HorseNet.Send(state, player, !spawned);
-            if (Echo != null)
-            {
-                HorseState echo = state;
-                echo.Position += Quaternion.Euler(0, yaw, 0) * Vector3.right * Echo.Value;
-                echo.Coat = (byte)(((int)Plugin.HorseCoat.Value + 1) % 4);
-                HorseNet.Echo(echo);
-            }
+            HorseNet.Send(state, player, !spawned);
         }
 
         // ---- Controls -----------------------------------------------------------------------------------------------
@@ -379,35 +367,6 @@ namespace TushonkaHorse
 
         // ---- Debug and cleanup --------------------------------------------------------------------------------------
 
-        // For the self test.
-        internal bool Spawned => body != null;
-        internal Transform Body => body.transform;
-        internal string Seen => model == null ? "-" : model.Seen + (model.MaterialsIntact ? "" : " MATERIALS LOST");
-
-        /// <summary>The horse beside you, side-on, facing the way you are (spawned if it wasn't there).</summary>
-        internal bool Beside(Player player)
-        {
-            if (body == null && !TrySpawn(player, 2.5f)) return false;
-            // Facing whichever way has the most open ground ahead, so there's somewhere to ride.
-            Vector3 at = player.Position, best = at, facing = Forward(player);
-            float room = -1;
-            for (int i = 0; i < 16; i++)
-            {
-                Vector3 f = Quaternion.Euler(0, i * 45, 0) * Forward(player), side = Quaternion.Euler(0, 90, 0) * f;
-                Vector3 point = at + side * (i < 8 ? 2.2f : -2.2f);
-                if (!Ground(point, 1.6f, 2.5f, out RaycastHit hit) || hit.normal.y < .8f || Mathf.Abs(hit.point.y - at.y) > .6f) continue;
-                point = hit.point;
-                if (!Fits(point, Bearing(point, point + f), 0)) continue;
-                if (Physics.Linecast(at + Vector3.up * 1.4f, point + Vector3.up * 1.4f, mask, QueryTriggerInteraction.Ignore)) continue;
-                float open = Physics.SphereCast(point + Vector3.up * 1.3f, .6f, f, out RaycastHit wall, 25f, mask, QueryTriggerInteraction.Ignore) ? wall.distance : 25f;
-                if (open > room) { room = open; best = point; facing = f; }
-            }
-            if (room < 0) return false;
-            mode = Mode.Idle;
-            Place(best, best + facing);
-            return true;
-        }
-
         private void ToggleDebug()
         {
             if (debug != null) { Destroy(debug); debug = null; }
@@ -421,13 +380,11 @@ namespace TushonkaHorse
         private void Cleanup()
         {
             if (netSpawned) HorseNet.Gone(world != null ? world.MainPlayer : null);
-            if (Echo != null) { Echo = null; HorseNet.Echo(null); }
             netSpawned = false;
             if (Riding.Horse == this) Riding.Release();
             if (debug != null) Destroy(debug);
-            if (test != null) Destroy(test);
             if (body != null) Destroy(body);
-            model = null; body = null; debug = null; test = null;
+            model = null; body = null; debug = null;
         }
 
         private void OnDestroy() => Cleanup();

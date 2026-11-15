@@ -64,9 +64,6 @@ namespace TushonkaHorse
         private const string StandingClip = "DismountLeft_Rider";
 
         internal static bool Active => active;
-        // For the self test.
-        internal static string State => !active ? "on foot" : $"{phase} {PhaseProgress:0.00} clip {riderClip ?? "-"} body {bodyWeight:0.0} arms {armWeight:0.0} rein {reinWeight:0.0} legs {legWeight:0.0}{(stowed ? " stowed" : "")}{(dismountWanted ? " getting off" : "")}";
-        internal static string Report => rig?.Report ?? "";
         /// <summary>In the saddle with the reins: the horse goes where you steer it.</summary>
         internal static bool Seated => active && phase == Phase.Riding && !dismountWanted;
 
