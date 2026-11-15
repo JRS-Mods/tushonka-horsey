@@ -1,6 +1,6 @@
 # Tushonka Horse
 
-Client-side BepInEx plugin for SPT, with Fika and headless-host support. Call your horse (a saddled one, from the HorseStarterKit Unreal project) in a
+Client-side BepInEx plugin for SPT, with Fika and headless-host support. Call your horse in a
 raid and it turns up beside you, to ride. It doesn't appear until you call it, unless you set it to wait beside
 you at the start of each raid.
 
@@ -21,21 +21,6 @@ every player and any headless host installs the same version.
 | A / D | Turn |
 | Jump | Jump (about 1.1 m). Off a ledge it falls and lands with the kit's fall and landing clips |
 
-Getting on, you put your weapon away and step to the horse's side, then climb with the kit's rider animation on
-your own body: your arms grab the saddle, your leg swings over, and your view goes where the rider's head goes,
-turning the way the rider faces and down to the saddle while your hands are on it. The animation fades in from how
-you stood and out again at the end. Once you're up, your weapon comes back out. Getting off is the same the other
-way round (the horse pulls up first). You get on from whichever side you're standing, and off toward the side
-you're looking (left when looking ahead), or the other side if there's no room.
-
-In the saddle your legs sit astride with your feet in the stirrups, moving with the horse's walk, trot, gallop,
-turns and jumps (the kit's rider animations, put onto your own character). Your upper body is yours: look around,
-aim, shoot, lean, heal and loot as usual. Your left hand keeps the reins while your right holds your gun (both
-hands go on it to aim down the sights and to reload); with nothing in your hands, both hold the reins. Crouch, prone and vaulting are off in the saddle. You never fall or take
-fall damage from being on the horse.
-
-All 56 horse animations and all 55 UE4 rider animations from the kit are included. The `_Fast` and `_Reverse` clips
-are frame-for-frame copies the kit plays faster or backwards; the mod does that with playback speed.
 
 ## Settings (F12)
 
@@ -75,17 +60,3 @@ Solo SPT still works without Fika installed; the optional `TushonkaHorse.Fika.dl
 | `HorseNet.cs`, `Fika/FikaLink.cs` | Optional Fika handshake, host/headless relay, and remote horse replicas |
 | `RiderAnimation.cs`, `RiderRig.cs` | `rider.bin`; putting it onto your character's hips, chest, arms and legs, blended over the game's pose |
 | `HorseTest.cs` | The self test |
-
-## Building
-
-`.\build.ps1` builds against `F:\SPT`, packs `dist\TushonkaHorse-<version>.zip` and installs it.
-
-The assets in `assets\` are made from the Unreal project:
-
-1. `UnrealEditor-Cmd work\HorseExport\HorseExport.uproject -run=pythonscript -script=tools\export_unreal.py`
-   (meshes, animations, textures as FBX/TGA) and the same with `tools\export_hair_gltf.py` (the mane and tail are
-   cloth sections, which the FBX exporter leaves out). `work\HorseExport` is a throwaway copy of the kit's horse folders.
-2. `blender -b --python tools\convert_blender.py` writes `assets\horse.bin` (horse), `assets\rider.bin`
-   (rider joint positions, in the horse's space) and the textures.
-3. `blender -b --python tools\validate_preview.py` reads `horse.bin` back and renders `work\exported\preview.png`
-   (horse with the rider drawn as a stick figure).
